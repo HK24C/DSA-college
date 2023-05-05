@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 10
+typedef struct stacktype{
+    int a[MAX];
+    int top;
+}STACK;
+    
+    int is_overflow(STACK);
+    int is_underflow(STACK);
+    void push(STACK *,int);
+    int pop(STACK *);
+    int peep(STACK);
+    
+int is_overflow(STACK S)
+{
+    if(S.top==MAX-1)
+    return 1;
+    else 
+    return 0;
+}
+int is_underflow(STACK S)
+{
+    if(S.top==-1)
+    return 1;
+    else
+    return 0;
+}
+void push(STACK *stk,int item)
+{
+    stk->top=stk->top+1;
+    stk->a[stk->top]=item;
+}
+int pop(STACK *stk)
+{
+    int item;
+    item=stk->a[stk->top];
+    stk->top=stk->top-1;
+    return item;
+}
+int peep(STACK S)
+{
+  return S.a[S.top];
+}
+int main()
+{
+    int ch,item;
+    STACK S;
+    S.top=-1;
+    while(1)
+    {
+        printf("1.Push\n");
+        printf("2.pop\n");
+        printf("3.peep\n");
+        printf("4.Exit\n");
+      printf("Enter your choice:    ");
+      scanf("%d",&ch);
+
+      switch(ch)
+      {
+        case 1:
+            if(is_overflow(S))
+             printf("stack is overflow");
+            else{
+                printf("Enter the item to push: ");
+                scanf("%d",&item);
+            }
+            break;
+        case 2:
+            if(is_underflow(S))
+             printf("Stack is empty");
+            else{
+                item=pop(&S);
+                printf("Poped item is %d",item);
+            }         
+            break;
+        case 3:
+            peep(S);
+            break;
+        case 4:
+            exit(0);
+        default:
+            printf("Invlaid choice");
+            break;             
+      }
+    }
+    return 0;
+}
