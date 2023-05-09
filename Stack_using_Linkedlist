@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int info;
+    struct node *next;
+}node;
+typedef struct stack{
+    struct node *top;
+}STACK;
+void init_stack(STACK *S)
+{
+    S->top=NULL;
+}
+int is_Empty(STACK *S)
+{
+    return S->top=NULL;
+}
+void push(STACK *S, int info){
+    node *head=(node *)malloc(sizeof(node));
+    head->info=info;
+    head->next=S->top;
+    S->top=head;
+}
+int pop(STACK *S){
+    if(is_Empty(S))
+    {
+        printf("error! stack overflow\n");
+       return -1; 
+    }
+    int info=S->top->info;
+    node *temp=S->top;
+    S->top=S->top->next;
+    free(temp);
+    return info;
+}
+void print_stack(STACK *S)
+{
+    if(is_Empty(S)){
+        printf("stack is Empty\n");
+        return ;
+    }
+    printf("Enter Stack elements: ");
+    node *cur=S->top;
+    while(cur!=NULL){
+        printf("%d",cur->info);
+        cur=cur->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    STACK S;
+    init_stack(&S);
+    int choice,info;
+    while(1)
+    {
+        printf("\n******Stack Menu*******\n");
+        printf("1.push\n");
+        printf("2.pop\n");
+        printf("3.print stack\n");
+        printf("4.Exit\n");
+        printf("Enter your choice:    ");
+        scanf("%d",&choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter element to push:  ");
+                scanf("%d",&info);
+                push(&S,info);
+                break;
+            case 2:
+                info=pop(&S);
+                if(info!=-1){
+                    printf("Popped Element: %d\n",info);
+
+                }   
+                break;
+            case 3:
+                print_stack(&S);
+                break;
+            case 4:
+                printf("Exit program\n");
+                exit(0);
+            default:
+                printf("Invalid Choice!\n");
+                break;     
+        }
+    }
+    return 0;
+}
