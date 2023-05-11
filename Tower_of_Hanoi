@@ -1,0 +1,21 @@
+#include<stdio.h>
+int main()
+{
+    int n=3;
+    
+    TOH('a','b','c',n);  //(source,target,intermediate,pegs)
+    return 0;
+}
+void TOH(char a,char b,char c,int n)
+{
+    if(n==1)
+    {                       //base condition
+        printf("MOve disk from %c to %c\n",a,b);
+        return;
+    }
+    else{
+        TOH(a,c,b,n-1);
+        printf("Move Disc from %c to %c\n",a,b);
+        TOH(c,b,a,n-1);
+    }
+}
