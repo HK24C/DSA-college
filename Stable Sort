@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+typedef struct {
+    int key;
+    char data;
+} Record;
+
+void stableSort(Record arr[], int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j].key > arr[j + 1].key) {
+                // Swap records
+                Record temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    Record records[] = {
+        {4, 'A'},
+        {2, 'B'},
+        {1, 'C'},
+        {4, 'D'},
+        {3, 'E'},
+        {2, 'F'}
+    };
+    int numRecords = sizeof(records) / sizeof(records[0]);
+
+    printf("Before sorting:\n");
+    for (int i = 0; i < numRecords; i++) {
+        printf("%d - %c\n", records[i].key, records[i].data);
+    }
+
+    stableSort(records, numRecords);
+
+    printf("\nAfter sorting:\n");
+    for (int i = 0; i < numRecords; i++) {
+        printf("%d - %c\n", records[i].key, records[i].data);
+    }
+
+    return 0;
+}
